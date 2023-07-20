@@ -57,21 +57,37 @@ function generatePassword() {
     fuunction isValid() {
         if (passwordLength >= 8 && passwordLength <= 128){
             var includeUppercase = confirm("Do you want the password to include uppercase letters?");
-             if (includeUppercase === true) {var selectedUpperCase = prompt("Select at least 1 character that you want the password to include") unfinishedPassword.push(selectedUpperCase)};
-                 else {alert("Invalid Input Try Again") return}
+             if (includeUppercase === true) {
+                var selectedUpperCase = prompt("Select at least 1 character that you want the password to include");
+                 unfinishedPassword.push(selectedUpperCase);
+                };
+                 else {alert("Invalid Input Try Again");
+                 return;
+                };
             var includeLowercase = confirm("Do you want the passsword to include lowercase letters?");
-             if (includeLowerase === true) {var selectedLowerCase = prompt("Select at least 1 character that you want the password to include") unfinishedPassword.push(selectedLowerCase)};
-                 else {alert("Invalid Input, Try Again") return}
+             if (includeLowerase === true) {
+                var selectedLowerCase = prompt("Select at least 1 character that you want the password to include");
+                 unfinishedPassword.push(selectedLowerCase);
+                };
+                 else {alert("Invalid Input, Try Again");
+                 return;
+                };
             var includeSpecialChars = confirm("Do you want the password to include special characters?");
-    ``       if (includeSpecialChars === true) {var selectedSpecialCharacter = prompt("Select at least 1 character that you want the password to include") unfinishedPassword.push(selectedSpecialCharacter)};
-                else {alert("Invalid Input, Try Again") return}
+    ``       if (includeSpecialChars === true) {
+                var selectedSpecialCharacter = prompt("Select at least 1 character that you want the password to include");
+                 unfinishedPassword.push(selectedSpecialCharacter)};
+                else {alert("Invalid Input, Try Again");
+                return;
+            };
         } else {
             alert("Invalid Input, Try Again");
             return;     
-        }
+        };
     
     }
-   
+   if (isValid) {
+    var randomChar = Math.floor(Math.random() * array.length);
+   }
 
 
 
