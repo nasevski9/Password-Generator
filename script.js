@@ -20,109 +20,58 @@
 // THEN the password is either displayed in an alert or written to the page
 
 function generatePassword() {
-    // NEED A VARIABLE TO STORE THE PASSWORD AS IT IS BEING BUILT
-    // NEED A VARIABLE FOR OUR MEGA - ARRAY OF CHARACTERS
-    // NEED TO ASK THE USER HOW LONG THE VARIABLE SHOULD BE 
-        //PROMPT()
-        // NEED TO STORE IT IN A VARIABLE
-    // CONFIRM WHETHER TO USE UPPERCASE,LOWERCASE, AND/OR SPECIAL CHARACTERS
-    // NEED TO CHECK WHETHER THE USER SELECTED A VALID PASSWORD LENGTH AND AT LEAST 1 CHARACTER TYPE
-        // IF NOT PROMT THEM AGAIN OR ALERT THAT THE INPUT WASN'T VALID
-    //NEED TO MAKE SURE THAT AT LEAST 1 CHARACTER IS CHOSEN FROM EACH CHAR TYPE
-        //WHEN THE USER SELECTS A CHARACTER TYPE, GENERATE A RANDOM CHAR FORM THAT SET AND CONCATENATE IT TO THE UNFINISHED PASSWORD
-            // GENERATE A RANDOM CHAR: Math.floor(Math.random() * array.length)  gives me Index, NOT CHARACTER
-            // CAN USE .charAt()
-            //ONCE WE HAVE THE ACTUAL CHARACTER, CONCATENATE IT TO THE VARIABLE THAT IS STORING THE UNFINISHED PASSWORD
-        // PUSH THE SET TO THE MEGA - ARRAY
-    //ONCE WE HAVE OUR MEGA - ARRAY
-        // FOR LOOP:
-            // GENERATE A RANDOM CHAR: Math.floor(Math.random() * array.length)  gives me Index, NOT CHARACTER
-            // CAN USE .charAt()
-            //ONCE WE HAVE THE ACTUAL CHARACTER, CONCATENATE IT TO THE VARIABLE THAT IS STORING THE UNFINISHED PASSWORD
-            // I = UNFINISHEDPASSWORD.LENGTH; I < PASSWORDLENGTH
-        // RETURN UNFINISHED PASSWORD
 
-
-
-    var upperCase = ["ABCDEFGHIJKLMNOPQRSTUVWXYZ"];
-    var lowerCase = ["abcdefghijklmnopqrstuvwxyz"];
-    var specialCharacters = ["!@#$%^&*()_-+=[]{}|\:;/?,.<>`~"];
-
-    var password = [];
-    alert("Hello, answer a couple of questions to get started");
-    var passwordLength = prompt("How long do you want your password?");
-
-    var unfinishedPassword = [];
-    
-    fuunction isValid() {
-        if (passwordLength >= 8 && passwordLength <= 128){
-            var includeUppercase = confirm("Do you want the password to include uppercase letters?");
-             if (includeUppercase === true) {
-                var selectedUpperCase = prompt("Select at least 1 character that you want the password to include");
-                 unfinishedPassword.push(selectedUpperCase);
-                };
-                 else {alert("Invalid Input Try Again");
-                 return;
-                };
-            var includeLowercase = confirm("Do you want the passsword to include lowercase letters?");
-             if (includeLowerase === true) {
-                var selectedLowerCase = prompt("Select at least 1 character that you want the password to include");
-                 unfinishedPassword.push(selectedLowerCase);
-                };
-                 else {alert("Invalid Input, Try Again");
-                 return;
-                };
-            var includeSpecialChars = confirm("Do you want the password to include special characters?");
-    ``       if (includeSpecialChars === true) {
-                var selectedSpecialCharacter = prompt("Select at least 1 character that you want the password to include");
-                 unfinishedPassword.push(selectedSpecialCharacter)};
-                else {alert("Invalid Input, Try Again");
-                return;
-            };
-        } else {
-            alert("Invalid Input, Try Again");
-            return;     
-        };
-    
+    var upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    var lowerCase = "abcdefghijklmnopqrstuvwxyz";
+    var specialCharacters = "!@#$%^&*()_-+=[]{}|\\:;/?,.<>`~";
+  
+    var passwordLength = parseInt(prompt("Enter the password length (between 8 and 128):"));
+  
+    if (passwordLength >= 8 && passwordLength <= 128) {
+      var includeUppercase = confirm("Do you want the password to include uppercase letters?");
+      var includeLowerCase = confirm("Do you want the password to include lowercase letters?");
+      var includeSpecialChars = confirm("Do you want the password to include special characters?");
+  
+      var characterSet = "";
+      if (includeUppercase) {
+        characterSet += upperCase;
+      }
+      if (includeLowerCase) {
+        characterSet += lowerCase;
+      }
+      if (includeSpecialChars) {
+        characterSet += specialCharacters;
+      }
+  
+      if (characterSet.length > 0) {
+        var unfinishedPassword = [];
+        for (let i = 0; i < passwordLength; i++) {
+          var randomChar = characterSet.charAt(Math.floor(Math.random() * characterSet.length));
+          unfinishedPassword.push(randomChar);
+        }
+        return unfinishedPassword;
+      } else {
+        alert("Please select at least one character type. Try Again");
+        return [];
+      }
+    } else {
+      alert("Invalid password length. Try Again");
+      return [];
     }
-   if (isValid) {
-    var randomChar = Math.floor(Math.random() * array.length);
-   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
+   return unfinishedPassword;
+};
 
 function writePassword() {
     var password = generatePassword();
-
-}
-generatePassword();
+    var passwordContainer = document.getElementById("passwordContainer");
+  
+    if (password.length > 0) {
+      // Convert the array to a string and display it in the div
+      passwordContainer.innerHTML = "Generated Password: " + password.join("");
+    } else {
+      passwordContainer.innerHTML = "Invalid Input, Try Again";
+    }
+  }
+  
+const button = document.getElementById("myButton");
+button.addEventListener("click", writePassword);
